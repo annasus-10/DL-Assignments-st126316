@@ -1,0 +1,53 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch / model checkpoints
+*.pt
+*.pth
+*.ckpt
+checkpoints/*
+!checkpoints/.gitkeep
+
+# Training outputs
+runs/
+wandb/
+logs/
+outputs/
+results/*.csv
+results/*.json
+results/*.txt
+results/*.png
+!results/.gitkeep
+
+# Datasets
+data/
+datasets/
+CIFAR10/
+cifar-10-batches-py/
+
+# System/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
