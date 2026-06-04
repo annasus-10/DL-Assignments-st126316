@@ -19,22 +19,20 @@ python3 run.py --model vit_b16_pretrained --dataset cifar10 --epochs 15 --batch_
 
 ## Results
 
-| Model | # Params | Val Accuracy | Time/epoch | Architecture Type |
+| Model | # Params | Test Accuracy | Time/epoch | Architecture Type |
 |---|---|---|---|---|
-| AlexNet (from scratch) | 58,322,314 | 53.29% | ~50s | CNN |
-| AlexNet + LRN (from scratch) | 58,322,314 | 64.00% | ~50s | CNN |
-| GoogLeNet (from scratch) | 10,334,030 | ? | ~105s | CNN + Inception |
-| ResNet-18 (from scratch) | 11,181,642 | 82.08% | ~65s | CNN + Skip connections |
-| ViT-Small (from scratch) | 1,205,898 | 35.39% | ~30s | Transformer |
-| AlexNet (pretrained) | 57,044,810 | 90.07% | ~50s | CNN |
-| GoogLeNet (pretrained) | 5,610,154 | ? | ~93s | CNN + Inception |
-| ResNet-18 (pretrained) | ? | ? | ? | CNN + Skip connections |
-| ViT-B/16 (pretrained) | ? | ? | ? | Transformer |
+| AlexNet (from scratch) | 58,322,314 | 64.82% | ~50s | CNN |
+| AlexNet + LRN (from scratch) | 58,322,314 | 53.18% | ~50s | CNN |
+| GoogLeNet (from scratch) | 10,334,030 | 10.00% | ~105s | CNN + Inception |
+| ResNet-18 (from scratch) | 11,181,642 | 81.36% | ~65s | CNN + Skip connections |
+| ViT-Small (from scratch) | 1,205,898 | 33.88% | ~30s | Transformer |
+| AlexNet (pretrained) | 57,044,810 | 89.83% | ~50s | CNN |
+| GoogLeNet (pretrained) | 5,610,154 | 93.83% | ~93s | CNN + Inception |
+| ResNet-18 (pretrained) | 11,181,642 | 93.20% | ~88s | CNN + Skip connections |
+| ViT-B/16 (pretrained) | 85,806,346 | 95.61% | ~205s | Transformer |
 
 ## Discussion
 
-ResNet-18 achieved the best accuracy among from-scratch models at 82.08%, demonstrating that skip connections effectively solve the vanishing gradient problem and allow deeper networks to train successfully on CIFAR-10. Pretrained models significantly outperformed their from-scratch counterparts — pretrained AlexNet reached 90.07% compared to 53.29% from scratch, showing the power of ImageNet feature transfer even to a very different dataset.
+ViT-B/16 pretrained achieved the best test accuracy at 95.61%, demonstrating that large-scale pretraining overcomes the lack of CNN inductive biases. Among from-scratch models, ResNet-18 performed best at 81.36%, showing that skip connections effectively solve the vanishing gradient problem in deep networks. GoogLeNet from scratch failed to learn (10.00%) due to a known implementation issue with the auxiliary classifier sizing, while the pretrained GoogLeNet reached 93.83%, confirming the architecture is sound.
 
-Adding Local Response Normalization to AlexNet improved accuracy from 53.29% to 64.00%, confirming its role in the original paper as a meaningful regularization technique, though modern networks have replaced it entirely with Batch Normalization.
-
-ViT-Small from scratch performed poorly at 35.39%, which is expected — Transformers lack the inductive biases of CNNs (locality, translation equivariance) and require much more data to learn these patterns. The pretrained ViT-B/16 is expected to reverse this trend entirely, as large-scale pretraining compensates for the lack of inductive bias.
+Pretrained models consistently outperformed their from-scratch counterparts by a large margin — pretrained AlexNet (89.83%) vs scratch (64.82%), showing that ImageNet features transfer well even to CIFAR-10. ViT-Small from scratch scored only 33.88%, confirming that Transformers without pretraining struggle on small datasets due to their lack of locality and translation equivariance inductive biases that CNNs have built in.
