@@ -1,0 +1,7 @@
+torch==2.5.1
+torchvision
+torchaudio
+numpy
+tqdm
+matplotlib
+pandas
