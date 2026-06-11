@@ -105,38 +105,38 @@ def main():
     #  DETECTION                                                           #
     # ------------------------------------------------------------------ #
     elif args.dataset == 'coco':
-        assert args.path2data, '--path2data required for coco'
-        assert args.path2json, '--path2json required for coco'
+        if args.train or args.evaluate:
+            assert args.path2data, '--path2data required for coco'
+            assert args.path2json, '--path2json required for coco'
 
-        img_size = 608 if args.model == 'yolov4' else 416
+            img_size = 416
 
-        train_loader, val_loader = get_coco_dataloaders(
-            path2data=args.path2data,
-            path2json=args.path2json,
-            img_size=img_size,
-            batch_size=args.batch_size)
-
-        if args.train:
-            optimizer = optim.SGD(model.parameters(), lr=args.lr,
-                                  momentum=0.9, weight_decay=5e-4)
-            run_training(
-                model=model,
-                optimizer=optimizer,
-                dataloader=train_loader,
-                val_dataloader=val_loader,
-                device=device,
+            train_loader, val_loader = get_coco_dataloaders(
+                path2data=args.path2data,
+                path2json=args.path2json,
                 img_size=img_size,
-                n_epoch=args.epochs,
-                every_n_batch=False,
-                every_n_epoch=True,
-                ckpt_dir='checkpoints',
-                use_ciou=args.use_ciou,
-            )
+                batch_size=args.batch_size)
 
-        if args.evaluate:
-            map50 = compute_map(model, val_loader, device, img_size)
-            print(f'mAP@50: {map50:.4f}')
+            if args.train:
+                optimizer = optim.SGD(model.parameters(), lr=args.lr,
+                                      momentum=0.9, weight_decay=5e-4)
+                run_training(
+                    model=model,
+                    optimizer=optimizer,
+                    dataloader=train_loader,
+                    val_dataloader=val_loader,
+                    device=device,
+                    img_size=img_size,
+                    n_epoch=args.epochs,
+                    every_n_batch=False,
+                    every_n_epoch=True,
+                    ckpt_dir='checkpoints',
+                    use_ciou=args.use_ciou,
+                )
 
+            if args.evaluate:
+                map50 = compute_map(model, val_loader, device, img_size)
+                print(f'mAP@50: {map50:.4f}')
     # ------------------------------------------------------------------ #
     #  INFERENCE ON SINGLE IMAGE                                           #
     # ------------------------------------------------------------------ #

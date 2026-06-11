@@ -190,7 +190,8 @@ def run_training(model, optimizer, dataloader, val_dataloader, device, img_size,
               f"Conf: {epoch_conf:.4f} | Cls: {epoch_cls:.4f} | mAP@50(val): {map_str} | Time: {elapsed:.1f}s")
 
         if every_n_epoch:
-            ckpt_path = os.path.join(ckpt_dir, f"yolov4_epoch{epoch_i+1}.pt")
+            loss_tag = "ciou" if use_ciou else "iou"
+            ckpt_path = os.path.join(ckpt_dir, f"yolov4_{loss_tag}_epoch{epoch_i+1}.pt")
             torch.save(model.state_dict(), ckpt_path)
             print(f"         └─ saved → {ckpt_path}")
 
