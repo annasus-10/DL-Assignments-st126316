@@ -129,6 +129,32 @@ With only 500 labeled scans, the most critical property of a pre-training method
 
 ---
 
+## Visualizations
+
+### DINO Attention Maps
+
+![DINO Attention Maps](figures/dino_attention_maps.png)
+
+*DINO [CLS] token self-attention across all heads for 5 test images. Note emergent foreground segmentation — no segmentation labels were used during training.*
+
+### DINO Center Norm
+
+![DINO Center Norm](figures/dino_center_norm.png)
+
+### MAE Reconstruction Grid
+
+![MAE Reconstruction](figures/mae_reconstruction.png)
+
+*MAE reconstruction: original → masked (75%) → reconstructed.*
+
+### t-SNE Comparison
+
+![t-SNE Comparison](figures/tsne_comparison.png)
+
+*t-SNE projection of 2000 test embeddings per model. Well-separated clusters indicate semantically meaningful representations.*
+
+---
+
 ## Environment
 
 - Python 3.12, PyTorch 2.5.1+cu121
