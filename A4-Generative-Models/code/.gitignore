@@ -4,3 +4,4 @@ __pycache__/
 data/
 saved/*.pt
 saved/*.pth
+my_face.jpg
