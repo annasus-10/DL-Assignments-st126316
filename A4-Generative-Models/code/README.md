@@ -71,7 +71,7 @@ python3 run.py --model ddpm --weights saved/ddpm_mnist.pt --generate --n 64
 |---|---|---|---|---|---|---|---|---|---|---|
 | Count (out of 1000) | 34 | 212 | 73 | 123 | 100 | 59 | 56 | 154 | 93 | 96 |
 
-![Mode Collapse Histogram](figures/mode_collapse_histogram.png)
+![Mode Collapse Histogram](outputs/figures/mode_collapse_histogram.png)
 
 The distribution is uneven — digits 1 (212) and 7 (154) are heavily overrepresented while digits 0 (34) and 6 (56) are underrepresented, indicating partial mode collapse even under normal training.
 
@@ -81,7 +81,7 @@ The distribution is uneven — digits 1 (212) and 7 (154) are heavily overrepres
 |---|---|---|---|---|---|---|---|---|---|---|
 | Count (out of 1000) | 54 | 197 | 57 | 131 | 104 | 46 | 85 | 143 | 88 | 95 |
 
-![Mode Collapse Histogram (induced)](figures/mode_collapse_histogram_collapse.png)
+![Mode Collapse Histogram (induced)](outputs/figures/mode_collapse_histogram_collapse.png)
 
 With a 3× discriminator learning rate, collapse worsens — digit 1 dominates even more strongly (197) while digits 5 (46) and 0 (54) nearly vanish. A stronger discriminator overwhelms the generator early in training, forcing it to exploit the few modes it has already learned rather than exploring new ones.
 
@@ -104,11 +104,11 @@ With a 3× discriminator learning rate, collapse worsens — digit 1 dominates e
 
 ### 2b. Example translations
 
-![CycleGAN Default Grid](figures/cyclegan_grid.png)
+![CycleGAN Default Grid](outputs/figures/cyclegan_grid.png)
 
 *Default (λ_cyc = 10): Real dark | → Blonde | Real blonde | → Dark*
 
-![CycleGAN No-Cycle Grid](figures/cyclegan_grid_nocyc.png)
+![CycleGAN No-Cycle Grid](outputs/figures/cyclegan_grid_nocyc.png)
 
 *Ablation (λ_cyc = 0): translations lose face structure and introduce colour artefacts*
 
@@ -122,7 +122,7 @@ Without the cycle loss, the only constraint on G is to fool D_Y — the discrimi
 
 ### 3a. Translation result
 
-![Own Face Result](figures/my_face_result.png)
+![Own Face Result](outputs/figures/my_face_result.png)
 
 *Original | → Blonde Hair | → Dark Hair*
 
@@ -151,7 +151,7 @@ def cosine_beta_schedule(timesteps, s=0.008):
 
 ### 4b. Schedule comparison
 
-![Noise Schedule Comparison](figures/schedule_comparison.png)
+![Noise Schedule Comparison](outputs/figures/schedule_comparison.png)
 
 | Schedule | Loss at epoch 10 | Notes |
 |---|---|---|
@@ -160,11 +160,11 @@ def cosine_beta_schedule(timesteps, s=0.008):
 
 ### 4c. Sample grids
 
-![DDPM Linear Samples](figures/ddpm_grid_linear.png)
+![DDPM Linear Samples](outputs/figures/ddpm_grid_linear.png)
 
 *64 samples — linear schedule*
 
-![DDPM Cosine Samples](figures/ddpm_grid_cosine.png)
+![DDPM Cosine Samples](outputs/figures/ddpm_grid_cosine.png)
 
 *64 samples — cosine schedule*
 
@@ -174,15 +174,15 @@ The cosine schedule keeps ᾱ_t higher for longer at the start of the forward pr
 
 ## Visualizations
 
-![Generated MNIST Grid (GAN)](figures/gan_grid.png)
+![Generated MNIST Grid (GAN)](outputs/figures/gan_grid.png)
 
 *GAN generated MNIST digits after 20 epochs*
 
-![CycleGAN Translation Grid](figures/cyclegan_grid.png)
+![CycleGAN Translation Grid](outputs/figures/cyclegan_grid.png)
 
 *Real dark | → Blonde | Real blonde | → Dark*
 
-![DDPM Denoising Trajectory](figures/ddpm_trajectory_linear.png)
+![DDPM Denoising Trajectory](outputs/figures/ddpm_trajectory_linear.png)
 
 *Reverse diffusion: noise → digit across timesteps*
 
